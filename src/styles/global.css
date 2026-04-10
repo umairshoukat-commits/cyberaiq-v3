@@ -1,0 +1,345 @@
+@import "tailwindcss";
+@import "./tokens.css";
+
+@font-face {
+  font-family: "Geist Sans";
+  src: url("/fonts/Geist-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Geist Mono";
+  src: url("/fonts/GeistMono-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+  font-style: normal;
+}
+
+@theme {
+  --color-surface-0: var(--surface-0);
+  --color-surface-1: var(--surface-1);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-accent: var(--accent-primary);
+  --color-accent-secondary: var(--accent-secondary);
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  background: var(--surface-0);
+  color: var(--text-primary);
+  font-family: "Geist Sans", "PP Neue Montreal", system-ui, sans-serif;
+}
+
+::selection {
+  background: rgba(244, 121, 32, 0.3);
+  color: white;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 { text-wrap: balance; }
+body { font-size: 18px; line-height: 1.75; overflow-x: hidden; }
+
+/* Step 1: Global noise texture overlay */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.06;
+  mix-blend-mode: soft-light;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* Accessibility: focus states */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Accessibility: reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Ambient teal glow on elevated sections (#111520 and Philosophy #0F1219) */
+section[style*="#111520"]::before,
+section[style*="#0F1219"]::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  height: 50%;
+  background: radial-gradient(ellipse, rgba(8,145,178,0.04) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* FIX 4: Subtle top border on all sections (not hero/footer) */
+main > :not(:first-child) > section,
+main > section:not(:first-child) {
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+/* FIX 5: CTA button hover glow pulse */
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 15px rgba(249,115,22,0.4), 0 0 30px rgba(232,67,147,0.25), 0 0 60px rgba(139,92,246,0.15); }
+  50% { box-shadow: 0 0 20px rgba(249,115,22,0.5), 0 0 40px rgba(232,67,147,0.3), 0 0 80px rgba(139,92,246,0.2); }
+}
+
+/* ScrollReveal initial state */
+.scroll-reveal-init {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .scroll-reveal-init {
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+}
+
+/* ScrollReveal fallback — show content if GSAP hasn't loaded after 3s */
+@keyframes reveal-fallback {
+  to { opacity: 1; transform: none; }
+}
+[data-scroll-reveal] {
+  animation: reveal-fallback 0.001s forwards;
+  animation-delay: 3s;
+}
+
+/* Pillar card hover */
+.pillar-card:hover {
+  background: rgba(255,255,255,0.04) !important;
+  border-color: rgba(244,121,32,0.2) !important;
+  box-shadow: 0 0 30px rgba(244,121,32,0.06);
+  transform: translateY(-4px);
+}
+
+/* Reality card hover */
+.reality-pill:hover {
+  background: rgba(255,255,255,0.05) !important;
+  border-color: rgba(255,255,255,0.12) !important;
+  transform: translateY(-2px);
+}
+
+/* AI Resilience framework card hover */
+.fw-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.fw-card:hover {
+  background: rgba(255,255,255,0.04) !important;
+  border-color: rgba(8,145,178,0.25) !important;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 24px rgba(8,145,178,0.08);
+}
+
+/* Nav link underline animation */
+.nav-link {
+  position: relative;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--accent-primary);
+  transform: scaleX(0);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center;
+}
+.nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+/* Dark theme form inputs */
+input, textarea, select {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 8px;
+  color: #f1f1f3 !important;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+input:hover, textarea:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+input:focus, textarea:focus, select:focus {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-color: rgba(8,145,178,0.5) !important;
+  box-shadow: 0 0 0 3px rgba(8,145,178,0.15) !important;
+  outline: none;
+}
+input::placeholder, textarea::placeholder {
+  color: rgba(255, 255, 255, 0.35) !important;
+}
+
+/* Footer link hover */
+footer a {
+  transition: color 0.2s ease;
+}
+
+/* ── UPGRADE 1: Animated gradient borders ── */
+@property --border-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .gradient-border-card { position: relative; z-index: 0; }
+  .gradient-border-card::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: 13px;
+    background: conic-gradient(from var(--border-angle), transparent 40%, rgba(8,145,178,0.6) 50%, rgba(139,92,246,0.4) 60%, transparent 70%);
+    animation: border-rotate 6s linear infinite;
+    z-index: -1;
+  }
+  .gradient-border-card::after {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: 13px;
+    background: conic-gradient(from var(--border-angle), transparent 40%, rgba(8,145,178,0.3) 50%, rgba(139,92,246,0.2) 60%, transparent 70%);
+    filter: blur(15px);
+    animation: border-rotate 6s linear infinite;
+    z-index: -2;
+  }
+  @keyframes border-rotate { to { --border-angle: 360deg; } }
+}
+
+/* ── UPGRADE 2: Glassmorphism ── */
+.glass-card {
+  background: rgba(255, 255, 255, 0.04) !important;
+  backdrop-filter: blur(12px) saturate(150%);
+  -webkit-backdrop-filter: blur(12px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.07) !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+/* ── UPGRADE 3: Hover shine sweep ── */
+@media (prefers-reduced-motion: no-preference) {
+  .shine-card { position: relative; overflow: hidden; }
+  .shine-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.04), transparent);
+    pointer-events: none;
+    z-index: 1;
+    transition: none;
+  }
+  .shine-card:hover::before {
+    left: 100%;
+    transition: left 0.6s ease;
+  }
+}
+
+/* ── UPGRADE 4: Animated grid background ── */
+.grid-bg { position: relative; }
+.grid-bg > .grid-bg-pattern {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black 20%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black 20%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Step 2: Dot grid on surface-1 sections */
+section[style*="surface-1"],
+section[style*="#111520"] {
+  background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.035) 1px, transparent 0);
+  background-size: 32px 32px;
+}
+
+/* Step 3: Teal glow section separators between ALL sections */
+main > :not(:first-child) {
+  position: relative;
+}
+main > :not(:first-child)::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  max-width: 800px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(8,145,178,0.4) 20%, rgba(6,182,212,0.6) 50%, rgba(8,145,178,0.4) 80%, transparent);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Step 4: Teal glow bleeds at key section boundaries */
+main > :nth-child(2) { overflow: visible; }
+main > :nth-child(2)::after {
+  content: "";
+  position: absolute;
+  top: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 500px;
+  height: 160px;
+  background: radial-gradient(ellipse, rgba(8, 145, 178, 0.07) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+main > :nth-child(5)::after {
+  content: "";
+  position: absolute;
+  top: -60px;
+  left: 65%;
+  transform: translateX(-50%);
+  width: 400px;
+  height: 140px;
+  background: radial-gradient(ellipse, rgba(8, 145, 178, 0.05) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+main > :nth-child(10)::after {
+  content: "";
+  position: absolute;
+  top: -60px;
+  left: 35%;
+  transform: translateX(-50%);
+  width: 400px;
+  height: 140px;
+  background: radial-gradient(ellipse, rgba(8, 145, 178, 0.05) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}

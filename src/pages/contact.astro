@@ -1,0 +1,33 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/ui/PageHero";
+import ContactForm from "../components/sections/ContactForm";
+---
+
+<BaseLayout title="Contact — CyberAIQ" description="Start a strategic conversation with CyberAIQ AG. Hyperscaler-first security, AI, cloud, and quantum transformation." hidePreFooter>
+  <PageHero client:load variant="contact" title="Contact Us" subtitle="Transformation starts with clarity" />
+
+  <section class="py-12 md:py-16 lg:py-24">
+    <div class="mx-auto max-w-3xl px-6 text-center md:px-10">
+      <h2 class="text-3xl font-bold md:text-4xl lg:text-5xl" style="color: var(--text-primary);">
+        Start the <span style="color: var(--accent-primary);">Conversation</span>
+      </h2>
+      <p class="mt-5 text-base leading-relaxed md:text-lg" style="color: var(--text-secondary);">
+        Transformation starts with clarity.
+      </p>
+      <div class="mt-8">
+        <a
+          href="#form"
+          class="inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-base font-semibold transition-all duration-300"
+          style="background: linear-gradient(135deg, #F97316 0%, #E84393 50%, #8B5CF6 100%); background-size: 200% 200%; background-position: 0% 50%; color: #fff; box-shadow: 0 0 12px rgba(232, 67, 147, 0.15);"
+        >
+          Start a Conversation &rarr;
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div id="form">
+    <ContactForm client:load />
+  </div>
+</BaseLayout>

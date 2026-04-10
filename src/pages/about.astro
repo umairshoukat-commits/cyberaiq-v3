@@ -1,0 +1,14 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/ui/PageHero";
+import WhoWeAre from "../components/sections/WhoWeAre";
+import Philosophy from "../components/sections/Philosophy";
+import Leadership from "../components/sections/Leadership";
+---
+
+<BaseLayout title="About Us — CyberAIQ" description="Founded by serial entrepreneurs and hyperscaler leaders. CyberAIQ AG brings deep cyber expertise, AI-first thinking, and hyperscaler-native execution.">
+  <PageHero client:load variant="about" title="About Us" orange="About Us" subtitle="Founded by serial entrepreneurs and hyperscaler leaders" />
+  <WhoWeAre client:visible />
+  <Philosophy client:visible />
+  <Leadership client:visible />
+</BaseLayout>

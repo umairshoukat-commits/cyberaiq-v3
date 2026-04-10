@@ -1,0 +1,10 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/ui/PageHero";
+import Services from "../components/sections/Services";
+---
+
+<BaseLayout title="Services — CyberAIQ" description="Cyber transformation, AI enablement, cloud transformation, and quantum readiness. Architecting trust for the era of intelligence.">
+  <PageHero client:load variant="services" title="Services" subtitle="Architecting trust for the era of intelligence" />
+  <Services client:visible />
+</BaseLayout>

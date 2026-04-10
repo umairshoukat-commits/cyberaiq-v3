@@ -1,0 +1,109 @@
+---
+import "../styles/global.css";
+import { ClientRouter } from "astro:transitions";
+import SmoothScroll from "../components/layout/SmoothScroll";
+import Navbar from "../components/layout/Navbar";
+import PreFooterCTA from "../components/layout/PreFooterCTA";
+import Footer from "../components/layout/Footer";
+
+interface Props {
+  title?: string;
+  description?: string;
+  hidePreFooter?: boolean;
+}
+
+const {
+  title = "CyberAIQ — Converging Trust in the Age of AI, Cloud, Cyber & Quantum",
+  description = "Hyperscaler-first by design. Automation-led by conviction. Built for what's next.",
+  hidePreFooter = false,
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, "https://cyberaiq.com");
+---
+
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonicalURL.href} />
+    <link rel="preload" href="/fonts/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content="https://cyberaiq.com/images/selections/hero-bg.webp" />
+    <meta property="og:url" content={canonicalURL.href} />
+    <meta property="og:site_name" content="CyberAIQ AG" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="https://cyberaiq.com/images/selections/hero-bg.webp" />
+
+    <title>{title}</title>
+    <script is:inline>document.documentElement.classList.add('dark');</script>
+    <ClientRouter />
+  </head>
+  <body class="min-h-screen bg-surface-0">
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[9999] focus:rounded focus:bg-[#F97316] focus:px-4 focus:py-2 focus:text-white">Skip to main content</a>
+    <SmoothScroll client:load />
+    <Navbar client:load />
+    <main id="main-content" transition:animate="fade">
+      <slot />
+    </main>
+    {!hidePreFooter && <PreFooterCTA client:visible />}
+    <Footer client:visible />
+
+    <script is:inline>
+    (function(){
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      function initMobileBorders() {
+        var testCard = document.querySelector('.gradient-border-card');
+        if (!testCard) return;
+        var before = getComputedStyle(testCard, '::before');
+        var t0 = before.transform;
+        setTimeout(function() {
+          var t1 = getComputedStyle(testCard, '::before').transform;
+          if (t0 !== t1) return; // CSS animation works — do nothing
+          var cards = document.querySelectorAll('.gradient-border-card');
+          for (var i = 0; i < cards.length; i++) {
+            var card = cards[i];
+            if (card.querySelector('.mobile-border-spinner')) continue;
+            var spinner = document.createElement('div');
+            spinner.className = 'mobile-border-spinner';
+            spinner.style.cssText = 'position:absolute;top:50%;left:50%;width:150%;height:150%;translate:-50% -50%;background:conic-gradient(transparent 0deg,transparent 140deg,rgba(8,145,178,0.6) 160deg,rgba(139,92,246,0.4) 200deg,transparent 220deg,transparent 360deg);pointer-events:none;z-index:-2;';
+            var cover = document.createElement('div');
+            cover.className = 'mobile-border-cover';
+            var bg = getComputedStyle(card).backgroundColor;
+            cover.style.cssText = 'position:absolute;inset:1.5px;background:' + (bg || '#0D1017') + ';border-radius:inherit;z-index:-1;pointer-events:none;';
+            card.style.position = 'relative';
+            card.style.overflow = 'hidden';
+            card.style.isolation = 'isolate';
+            card.insertBefore(cover, card.firstChild);
+            card.insertBefore(spinner, card.firstChild);
+          }
+          var spinners = document.querySelectorAll('.mobile-border-spinner');
+          var angle = 0;
+          function spin() {
+            angle = (angle + 0.8) % 360;
+            for (var j = 0; j < spinners.length; j++) {
+              spinners[j].style.transform = 'rotate(' + angle + 'deg)';
+            }
+            requestAnimationFrame(spin);
+          }
+          requestAnimationFrame(spin);
+        }, 500);
+      }
+      if (document.readyState === 'complete') initMobileBorders();
+      else window.addEventListener('load', initMobileBorders);
+      document.addEventListener('astro:page-load', initMobileBorders);
+    })();
+    </script>
+  </body>
+</html>

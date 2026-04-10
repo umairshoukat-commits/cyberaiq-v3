@@ -1,0 +1,28 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/sections/Hero";
+import Reality from "../components/sections/Reality";
+import Differentiators from "../components/sections/Differentiators";
+import Pillars from "../components/sections/Pillars";
+import HyperscalerTicker from "../components/sections/HyperscalerTicker";
+import Stats from "../components/sections/Stats";
+import WhoWeAre from "../components/sections/WhoWeAre";
+import Philosophy from "../components/sections/Philosophy";
+import Services from "../components/sections/Services";
+import Leadership from "../components/sections/Leadership";
+import ContactForm from "../components/sections/ContactForm";
+---
+
+<BaseLayout>
+  <Hero client:load />
+  <Reality client:visible />
+  <Differentiators client:visible />
+  <Pillars client:visible />
+  <HyperscalerTicker client:visible />
+  <Stats client:visible />
+  <WhoWeAre client:visible />
+  <Philosophy client:visible />
+  <Services client:visible />
+  <Leadership client:visible />
+  <ContactForm client:visible />
+</BaseLayout>

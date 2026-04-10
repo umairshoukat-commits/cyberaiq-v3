@@ -1,0 +1,10 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/ui/PageHero";
+import AIResilienceContent from "../components/sections/AIResilienceContent";
+---
+
+<BaseLayout title="AI Resilience — CyberAIQ" description="AI Resilience by CyberAIQ AG — intelligence that endures, security that adapts, trust that scales." hidePreFooter>
+  <PageHero client:load variant="ai-resilience" title="AI RESILIENCE" subtitle="Intelligence That Endures. Security That Adapts. Trust That Scales." />
+  <AIResilienceContent client:visible />
+</BaseLayout>

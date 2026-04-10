@@ -1,0 +1,52 @@
+:root {
+  /* Surfaces — 4-level dark hierarchy (MASTER.md §3) */
+  --surface-0: #0A0A0A;
+  --bg-base: #0A0A0A;
+  --surface-1: #141414;
+  --bg-surface-1: #141414;
+  --surface-2: #1A1A1A;
+  --bg-surface-2: #1A1A1A;
+  --surface-3: #262626;
+  --bg-surface-3: #262626;
+  --bg-hero: #050510;
+
+  /* Brand (MASTER.md §3) */
+  --accent-primary: #F97316;
+  --accent-secondary: #2B7EC1;
+  --cta-gradient: linear-gradient(135deg, #F97316, #E84393, #8B5CF6);
+
+  /* Text (MASTER.md §3) */
+  --text-primary: #FAFAFA;
+  --text-secondary: #A3A3A3;
+  --text-muted: #737373;
+
+  /* Borders (MASTER.md §3) */
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --border-default: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(255, 255, 255, 0.15);
+  --border-accent: rgba(249, 115, 22, 0.25);
+
+  /* Spacing scale (8px base) */
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-6: 48px;
+  --space-8: 64px;
+  --space-12: 96px;
+  --space-16: 128px;
+  --space-20: 160px;
+
+  /* Typography (MASTER.md §4) */
+  --font-sans: 'Geist Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Geist Mono', 'JetBrains Mono', monospace;
+
+  /* Easing (MASTER.md §7) */
+  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+}
