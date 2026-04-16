@@ -1,65 +1,35 @@
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
+import { ShieldCheck, BrainCircuit, Cloud, Atom } from "lucide-react";
 import { gsap, ScrollTrigger } from "../../lib/gsap";
 import Card from "../ui/Card";
 import Button from "../ui/Button";
 import { services } from "../../content/site-content";
 
 const serviceIcons = [
-  // Cyber — shield (orange)
+  // Cyber — shield (orange) [MASTER.md §14 Stage 5] inline SVG → lucide
   {
     color: "var(--accent-primary)",
     bg: "rgba(244, 121, 32, 0.12)",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="h-7 w-7">
-        <path d="M12 2L3 7v5c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5z" />
-        <path d="M9 12l2 2 4-4" />
-      </svg>
-    ),
+    icon: <ShieldCheck className="h-7 w-7" strokeWidth={1.5} />,
   },
-  // AI — brain-circuit (blue)
+  // AI — brain-circuit (blue) [MASTER.md §13 change 6] lucide-react BrainCircuit
   {
     color: "var(--accent-secondary)",
     bg: "rgba(43, 126, 193, 0.12)",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="h-7 w-7">
-        <path d="M12 5a3 3 0 100-6 3 3 0 000 6z" />
-        <path d="M12 5v4" />
-        <path d="M6.5 9a2.5 2.5 0 100 5" />
-        <path d="M17.5 9a2.5 2.5 0 110 5" />
-        <path d="M6.5 14l2 2" />
-        <path d="M17.5 14l-2 2" />
-        <path d="M10 18h4" />
-        <path d="M12 18v3" />
-        <circle cx="12" cy="11" r="1" fill="currentColor" />
-        <circle cx="8" cy="16" r="1" fill="currentColor" />
-        <circle cx="16" cy="16" r="1" fill="currentColor" />
-      </svg>
-    ),
+    icon: <BrainCircuit className="h-7 w-7" strokeWidth={1.5} />,
   },
-  // Cloud (purple)
+  // Cloud (purple) [MASTER.md §14 Stage 5] inline SVG → lucide
   {
     color: "#8B5CF6",
     bg: "rgba(139, 92, 246, 0.12)",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="h-7 w-7">
-        <path d="M17.5 19a4.5 4.5 0 100-9h-1A7 7 0 105 12.5" />
-        <path d="M8 19h9.5" />
-      </svg>
-    ),
+    icon: <Cloud className="h-7 w-7" strokeWidth={1.5} />,
   },
-  // Quantum — atom (teal)
+  // Quantum — atom (teal) [MASTER.md §14 Stage 5] inline SVG → lucide
   {
     color: "#00A89D",
     bg: "rgba(0, 168, 157, 0.12)",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" className="h-7 w-7">
-        <circle cx="12" cy="12" r="2.5" />
-        <ellipse cx="12" cy="12" rx="10" ry="4" />
-        <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(60 12 12)" />
-        <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(120 12 12)" />
-      </svg>
-    ),
+    icon: <Atom className="h-7 w-7" strokeWidth={1.5} />,
   },
 ];
 
@@ -92,15 +62,18 @@ export default function Services() {
   );
 
   return (
+    // [MASTER.md §6a Stage 3] bg normalized to alternation rhythm
     <section
       className="relative py-12 md:py-16 lg:py-24"
-      style={{ background: "var(--surface-1)" }}
+      style={{ background: "#0F0F0F" }}
     >
-      {/* Atmospheric background image */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <img src="/images/selections/Services.webp" alt="" className="h-full w-full object-cover" style={{ opacity: 0.12 }} loading="lazy" decoding="async" />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, var(--surface-1) 0%, transparent 20%, transparent 80%, var(--surface-1) 100%), linear-gradient(to right, var(--surface-1) 0%, transparent 15%, transparent 85%, var(--surface-1) 100%)" }} />
-      </div>
+      {/* [MASTER.md §13 change 1] Services.webp decorative background removed */}
+      {/* [MASTER.md §13 change 2] Service card resting bg bumped from 0.02 to 0.04 — revert this <style> block to restore original */}
+      <style>{`
+        .service-card > .shine-card {
+          background: rgba(255, 255, 255, 0.04) !important;
+        }
+      `}</style>
       <div className="relative mx-auto max-w-[1280px] px-6 md:px-10 lg:px-20">
         <div className="mx-auto max-w-3xl text-center">
           <h2
@@ -135,7 +108,7 @@ export default function Services() {
                   </h3>
                   <p
                     className="mt-3 text-sm leading-relaxed"
-                    style={{ color: "var(--accent-primary)", opacity: 0.8 }}
+                    style={{ color: "var(--text-secondary)" }}
                   >
                     {service.description}
                   </p>
@@ -151,7 +124,7 @@ export default function Services() {
                         <li
                           key={j}
                           className="flex items-start gap-2 text-sm"
-                          style={{ color: "var(--text-muted)" }}
+                          style={{ color: "var(--text-secondary)" }}
                         >
                           <svg className="mt-0.5 h-4 w-4 shrink-0" viewBox="0 0 20 20" fill="var(--accent-primary)">
                             <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
@@ -164,7 +137,7 @@ export default function Services() {
                   <div className="mt-6 h-px w-full" style={{
                     background: "linear-gradient(90deg, transparent, rgba(8,145,178,0.4) 20%, rgba(6,182,212,0.6) 50%, rgba(8,145,178,0.4) 80%, transparent)",
                   }} />
-                  <p className="mt-4 text-sm italic" style={{ color: meta.color }}>
+                  <p className="mt-4 text-sm italic" style={{ color: "var(--text-secondary)" }}>
                     {service.tagline}
                   </p>
                 </Card>

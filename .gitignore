@@ -23,3 +23,26 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 .vercel
+
+# AI tooling / assistant configs
+.agent/
+.claude/
+.codebuddy/
+.codex/
+.continue/
+.cursor/
+.gemini/
+.kiro/
+.opencode/
+.qoder/
+.roo/
+.trae/
+.windsurf/
+
+# local scratch / backups
+context.md
+design-system/MASTER.old.md
+src 2/
+
+# github prompts/skill installs (not shipping code)
+.github/prompts/

@@ -50,7 +50,8 @@ export default function WhoWeAre() {
   );
 
   return (
-    <section className="py-12 md:py-16 lg:py-24">
+    // [MASTER.md §6a Stage 3] bg normalized to alternation rhythm
+    <section className="py-12 md:py-16 lg:py-24" style={{ background: "#0F0F0F" }}>
       <div className="mx-auto max-w-[1280px] px-6 md:px-10 lg:px-20">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
           <div>

@@ -1,34 +1,17 @@
+// [MASTER.md §6b Stage 2] Simplified to true minimalism + orange accent word override
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { gsap, SplitText } from "../../lib/gsap";
 
 type PageVariant = "about" | "services" | "partners" | "careers" | "contact" | "ai-resilience";
 
-const gradients: Record<PageVariant, [string, string]> = {
-  about: [
-    "radial-gradient(ellipse at 30% 40%, rgba(139,92,246,0.12) 0%, transparent 60%)",
-    "radial-gradient(ellipse at 70% 60%, rgba(59,130,246,0.08) 0%, transparent 60%)",
-  ],
-  services: [
-    "radial-gradient(ellipse at 30% 40%, rgba(6,182,212,0.15) 0%, transparent 60%)",
-    "radial-gradient(ellipse at 70% 60%, rgba(59,130,246,0.08) 0%, transparent 60%)",
-  ],
-  partners: [
-    "radial-gradient(ellipse at 30% 40%, rgba(249,115,22,0.10) 0%, transparent 60%)",
-    "radial-gradient(ellipse at 70% 60%, rgba(139,92,246,0.08) 0%, transparent 60%)",
-  ],
-  careers: [
-    "radial-gradient(ellipse at 30% 40%, rgba(129,140,248,0.14) 0%, transparent 60%)",
-    "radial-gradient(ellipse at 70% 60%, rgba(6,182,212,0.08) 0%, transparent 60%)",
-  ],
-  contact: [
-    "radial-gradient(ellipse at 30% 40%, rgba(59,130,246,0.10) 0%, transparent 60%)",
-    "radial-gradient(ellipse at 70% 60%, rgba(8,145,178,0.06) 0%, transparent 60%)",
-  ],
-  "ai-resilience": [
-    "radial-gradient(ellipse at 30% 40%, rgba(8,145,178,0.18) 0%, transparent 60%)",
-    "radial-gradient(ellipse at 70% 60%, rgba(76,29,149,0.10) 0%, transparent 60%)",
-  ],
+const eyebrows: Record<PageVariant, string> = {
+  about: "ABOUT",
+  services: "SERVICES",
+  partners: "PARTNERS",
+  careers: "CAREERS",
+  contact: "CONTACT",
+  "ai-resilience": "AI RESILIENCE",
 };
 
 interface PageHeroProps {
@@ -36,11 +19,15 @@ interface PageHeroProps {
   subtitle?: string;
   orange?: string;
   variant?: PageVariant;
+  eyebrow?: string;
 }
 
-export default function PageHero({ title, subtitle, orange, variant = "services" }: PageHeroProps) {
+export default function PageHero({ title, subtitle, orange, variant = "services", eyebrow }: PageHeroProps) {
   const h1Ref = useRef<HTMLHeadingElement>(null);
   const subRef = useRef<HTMLParagraphElement>(null);
+  const lineRef = useRef<HTMLDivElement>(null);
+
+  const eyebrowText = eyebrow ?? eyebrows[variant];
 
   useGSAP(() => {
     const h1 = h1Ref.current;
@@ -53,42 +40,36 @@ export default function PageHero({ title, subtitle, orange, variant = "services"
       gsap.set(subRef.current, { opacity: 0, y: 16 });
       tl.to(subRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, "-=0.3");
     }
+    if (lineRef.current) {
+      gsap.set(lineRef.current, { scaleX: 0, transformOrigin: "left center" });
+      tl.to(lineRef.current, { scaleX: 1, duration: 0.4, ease: "power3.out" }, "-=0.3");
+    }
   }, []);
-
-  const [glow1, glow2] = gradients[variant];
 
   return (
     <section
-      className="page-hero relative flex min-h-[220px] items-end overflow-hidden pb-12 pt-32 md:min-h-[280px] md:pb-16 md:pt-[180px]"
-      style={{ backgroundColor: "#0a0a1a" }}
+      className="page-hero relative pt-40 pb-12 md:pt-44 md:pb-16"
+      style={{
+        backgroundColor: "#0A0A0A",
+        borderBottom: "1px solid rgba(255,255,255,0.06)",
+      }}
     >
-      {/* Gradient glows */}
-      <div className="pointer-events-none absolute inset-0" style={{ zIndex: 0 }}>
-        <div className="absolute inset-0" style={{ background: glow1 }} />
-        <div className="absolute inset-0" style={{ background: glow2 }} />
-      </div>
-
-      {/* Bottom fade into next section */}
-      <div className="pointer-events-none absolute inset-0" style={{ zIndex: 1 }}>
-        <div className="absolute inset-0" style={{
-          background: "linear-gradient(to bottom, transparent 60%, #0D1017 100%)",
-        }} />
-      </div>
-
-      {/* Noise texture via ::after on .page-hero */}
-
-      {/* Bottom separator */}
-      <div className="pointer-events-none absolute bottom-0 left-0 right-0" style={{ zIndex: 2 }}>
-        <div className="mx-auto h-px w-[60%] max-w-[600px]" style={{
-          background: "linear-gradient(90deg, transparent, rgba(8,145,178,0.2), transparent)",
-        }} />
-      </div>
-
-      <div className="relative z-10 mx-auto w-full max-w-[1280px] px-6 text-center md:px-10 lg:px-20">
+      <div className="relative z-10 mx-auto w-full max-w-[1280px] px-6 text-left md:px-10 lg:px-20">
+        <p
+          className="mb-5 text-xs font-medium uppercase"
+          style={{ color: "#737373", letterSpacing: "0.15em" }}
+        >
+          {eyebrowText}
+        </p>
         <h1
           ref={h1Ref}
-          className="text-4xl font-bold md:text-5xl lg:text-6xl"
-          style={{ color: "var(--text-primary)" }}
+          className="font-semibold"
+          style={{
+            color: "var(--text-primary)",
+            fontSize: "clamp(36px, 5vw, 56px)",
+            letterSpacing: "-0.03em",
+            lineHeight: 1.08,
+          }}
         >
           {orange ? (
             <>
@@ -97,32 +78,25 @@ export default function PageHero({ title, subtitle, orange, variant = "services"
               {title.split(orange)[1] || ""}
             </>
           ) : (
-            <span style={{ color: "var(--accent-primary)" }}>{title}</span>
+            title
           )}
         </h1>
         {subtitle && (
           <p
             ref={subRef}
-            className="mx-auto mt-5 max-w-2xl text-base leading-relaxed md:text-lg"
+            className="mt-4 max-w-2xl text-base leading-relaxed md:text-lg"
             style={{ color: "var(--text-secondary)" }}
           >
             {subtitle}
           </p>
         )}
+        <div
+          ref={lineRef}
+          className="mt-6"
+          style={{ width: "48px", height: "1px", background: "var(--accent-primary)" }}
+          aria-hidden="true"
+        />
       </div>
-
-      <style>{`
-        .page-hero::after {
-          content: "";
-          position: absolute;
-          inset: 0;
-          z-index: 1;
-          pointer-events: none;
-          opacity: 0.10;
-          mix-blend-mode: soft-light;
-          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-        }
-      `}</style>
     </section>
   );
 }

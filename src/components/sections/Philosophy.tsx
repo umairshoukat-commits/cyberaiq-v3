@@ -55,7 +55,8 @@ export default function Philosophy() {
   );
 
   return (
-    <section className="py-12 md:py-16 lg:py-24" style={{ background: "#0F1219" }}>
+    // [MASTER.md §6a Stage 3] bg normalized to alternation rhythm
+    <section className="py-12 md:py-16 lg:py-24" style={{ background: "#0A0A0A" }}>
       <div ref={sectionRef} className="mx-auto max-w-[1280px] px-6 md:px-10 lg:px-20">
         <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-16">
           <div>

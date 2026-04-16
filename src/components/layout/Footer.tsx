@@ -2,7 +2,8 @@ import { footer } from "../../content/site-content";
 
 export default function Footer() {
   return (
-    <footer role="contentinfo" aria-label="Footer" style={{ background: "var(--surface-1)", borderTop: "1px solid var(--border-subtle)" }}>
+    // [MASTER.md §6a Stage 3] bg normalized to alternation rhythm
+    <footer role="contentinfo" aria-label="Footer" style={{ background: "#0A0A0A", borderTop: "1px solid var(--border-subtle)" }}>
       <div className="mx-auto max-w-[1280px] px-6 py-12 md:px-10 md:py-16 lg:px-20">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4">
           {/* Logo + description */}

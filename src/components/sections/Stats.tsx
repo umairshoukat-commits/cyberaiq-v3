@@ -12,7 +12,8 @@ function parseStatValue(raw: string): { num: number; suffix: string; decimals: n
 
 export default function Stats() {
   return (
-    <section className="py-12 md:py-16 lg:py-24" style={{ background: "#111520", backgroundImage: "radial-gradient(ellipse 60% 40% at 50% 0%, rgba(6,182,212,0.10), transparent), radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px)", backgroundSize: "100% 100%, 24px 24px" }}>
+    // [MASTER.md §6a Stage 3] bg normalized to alternation rhythm
+    <section className="py-12 md:py-16 lg:py-24" style={{ background: "#0A0A0A" }}>
       <div className="mx-auto max-w-[1280px] px-6 md:px-10 lg:px-20">
         <ScrollReveal from={{ y: 40, opacity: 0 }} to={{ y: 0, opacity: 1, duration: 0.5, ease: "power2.out" }}>
           <div

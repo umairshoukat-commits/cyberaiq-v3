@@ -1,55 +1,36 @@
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
+import { CloudCog, Globe2, GraduationCap } from "lucide-react";
 import { gsap, ScrollTrigger } from "../../lib/gsap";
 import { home } from "../../content/site-content";
 
 const cardMeta = [
+  // [MASTER.md §14 Stage 5] inline SVG → lucide
   {
     accent: "rgba(249, 115, 22, 0.6)",
     accentHover: "rgba(249, 115, 22, 0.3)",
     iconBg: "rgba(249, 115, 22, 0.15)",
     iconColor: "#F97316",
     shadow: "rgba(249, 115, 22, 0.1)",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
-        <path d="M17.5 19a4.5 4.5 0 100-9h-1A7 7 0 105 12.5" />
-        <path d="M8 19h9.5" />
-        <path d="M12 13v3" />
-        <path d="M9.5 16h5" />
-      </svg>
-    ),
+    icon: <CloudCog className="h-6 w-6" strokeWidth={1.5} />,
   },
+  // [MASTER.md §14 Stage 5] inline SVG → lucide
   {
     accent: "rgba(8, 145, 178, 0.6)",
     accentHover: "rgba(8, 145, 178, 0.3)",
     iconBg: "rgba(8, 145, 178, 0.15)",
     iconColor: "#0891B2",
     shadow: "rgba(8, 145, 178, 0.1)",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
-        <circle cx="12" cy="12" r="10" />
-        <path d="M12 2a14.5 14.5 0 000 20 14.5 14.5 0 000-20" />
-        <line x1="2" y1="12" x2="22" y2="12" />
-        <path d="M16 8l2-2-2-2" />
-        <path d="M8 16l-2 2 2 2" />
-      </svg>
-    ),
+    icon: <Globe2 className="h-6 w-6" strokeWidth={1.5} />,
   },
+  // [MASTER.md §14 Stage 5] inline SVG → lucide
   {
     accent: "rgba(139, 92, 246, 0.6)",
     accentHover: "rgba(139, 92, 246, 0.3)",
     iconBg: "rgba(139, 92, 246, 0.15)",
     iconColor: "#8B5CF6",
     shadow: "rgba(139, 92, 246, 0.1)",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
-        <path d="M6 9H4a2 2 0 01-2-2V5a2 2 0 012-2h2" />
-        <path d="M18 9h2a2 2 0 002-2V5a2 2 0 00-2-2h-2" />
-        <path d="M6 3h12v6a6 6 0 11-12 0V3z" />
-        <path d="M12 15v4" />
-        <path d="M8 19h8" />
-      </svg>
-    ),
+    icon: <GraduationCap className="h-6 w-6" strokeWidth={1.5} />,
   },
 ];
 
@@ -74,7 +55,8 @@ export default function Leadership() {
   );
 
   return (
-    <section className="relative py-12 md:py-16 lg:py-24" style={{ background: "#111520", backgroundImage: "radial-gradient(ellipse 60% 40% at 50% 0%, rgba(249,115,22,0.05), transparent), radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px)", backgroundSize: "100% 100%, 24px 24px" }}>
+    // [MASTER.md §6a Stage 3] bg normalized to alternation rhythm
+    <section className="relative py-12 md:py-16 lg:py-24" style={{ background: "#0A0A0A" }}>
       <div className="mx-auto max-w-[1280px] px-6 md:px-10 lg:px-20">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-3xl font-bold md:text-4xl lg:text-5xl" style={{ color: "var(--text-primary)" }}>

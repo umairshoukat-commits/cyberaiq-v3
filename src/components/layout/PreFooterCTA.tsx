@@ -2,7 +2,8 @@ import Button from "../ui/Button";
 
 export default function PreFooterCTA() {
   return (
-    <section className="py-12 md:py-16 lg:py-24" style={{ background: "#0D1017" }}>
+    // [MASTER.md §6a Stage 3] bg normalized to alternation rhythm
+    <section className="py-12 md:py-16 lg:py-24" style={{ background: "#0F0F0F" }}>
       <div className="mx-auto max-w-3xl px-6 text-center md:px-10">
         <h2
           className="text-3xl font-bold md:text-4xl lg:text-5xl"

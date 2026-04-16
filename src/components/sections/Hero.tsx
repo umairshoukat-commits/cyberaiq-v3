@@ -9,11 +9,27 @@ export default function Hero() {
     >
       {/* Layer 0: hero-bg */}
       <div className="pointer-events-none absolute inset-0" style={{ zIndex: 0 }}>
-        <img
-          src="/images/selections/hero-bg.webp"
-          alt=""
-          className="h-full w-full object-cover"
-          style={{ opacity: 0.08 }}
+        {/* [MASTER.md §6c Stage 4] preload auto→metadata for bandwidth + automation */}
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          poster="/images/selections/hero-bg.webp"
+          className="absolute inset-0 h-full w-full object-cover"
+          style={{ opacity: 0.55 }}
+          aria-hidden="true"
+        >
+          <source src="/videos/hero-loop.mp4" type="video/mp4" />
+        </video>
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              "radial-gradient(ellipse at center, transparent 0%, rgba(5, 5, 16, 0.4) 60%, rgba(5, 5, 16, 0.85) 100%), linear-gradient(180deg, rgba(5, 5, 16, 0.5) 0%, rgba(5, 5, 16, 0.3) 50%, rgba(5, 5, 16, 0.9) 100%)",
+            mixBlendMode: "normal",
+          }}
         />
       </div>
 

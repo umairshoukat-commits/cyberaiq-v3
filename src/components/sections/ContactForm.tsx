@@ -74,7 +74,8 @@ export default function ContactForm() {
   };
 
   return (
-    <section className="py-12 md:py-16 lg:py-24">
+    // [MASTER.md §6a Stage 3] bg normalized to alternation rhythm
+    <section className="py-12 md:py-16 lg:py-24" style={{ background: "#0F0F0F" }}>
       <div ref={sectionRef} className="mx-auto max-w-[1280px] px-6 md:px-10 lg:px-20">
         <h2 className="text-center text-3xl font-bold md:text-4xl lg:text-5xl" style={{ color: "var(--text-primary)" }}>
           Get <span style={{ color: "var(--accent-primary)" }}>In Touch</span>
